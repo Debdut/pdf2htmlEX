@@ -2,10 +2,10 @@ imageBuild
 poppler-data
 buildScripts/reSourceVersionEnvs
 brewFormula
-fontforge
+./fontforge
 *.tar.*
-poppler
-build
+./poppler
+**/build
 compile_commands.json
 CMakeCache.txt
 CMakeFiles/*
