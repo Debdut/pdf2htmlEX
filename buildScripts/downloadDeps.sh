@@ -3,10 +3,10 @@
 git clone --branch 20230101 https://github.com/fontforge/fontforge.git
 rm -rf fontforge/.git
 
-mv patches/fontforge/fontforge/CMakeLists.txt fontforge/fontforge/CMakeLists.txt
-mv patches/fontforge/fontforgeexe/CMakeLists.txt fontforge/fontforgeexe/CMakeLists.txt
-mv patches/fontforge/po/CMakeLists.txt fontforge/po/CMakeLists.txt
-mv patches/fontforge/pyhook/CMakeLists.txt fontforge/pyhook/CMakeLists.txt
+cp patches/fontforge/fontforge/CMakeLists.txt fontforge/fontforge/CMakeLists.txt
+cp patches/fontforge/fontforgeexe/CMakeLists.txt fontforge/fontforgeexe/CMakeLists.txt
+cp patches/fontforge/po/CMakeLists.txt fontforge/po/CMakeLists.txt
+cp patches/fontforge/pyhook/CMakeLists.txt fontforge/pyhook/CMakeLists.txt
 
 curl -L https://poppler.freedesktop.org/poppler-25.09.1.tar.xz -o poppler.tar.xz
 tar -xf poppler.tar.xz
