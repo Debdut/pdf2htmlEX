@@ -22,5 +22,6 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/freetype/lib/pkgconfig:\
 /opt/homebrew/opt/glib/lib/pkgconfig:\
 /opt/homebrew/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH"
 
-export JAVA_HOME="$(/usr/libexec/java_home)"
+export JAVA_HOME="$(brew --prefix openjdk)/libexec/openjdk.jdk/Contents/Home"
 export PATH="$JAVA_HOME/bin:$PATH"
+
