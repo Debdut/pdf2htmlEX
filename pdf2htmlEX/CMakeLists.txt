@@ -1,10 +1,30 @@
 # leave this above project(pdf2htmlEX)
 # set default build type to Release
+cmake_minimum_required(VERSION 4.1.0 FATAL_ERROR)
+
 set(CMAKE_BUILD_TYPE Release CACHE STRING "Build configuration (Debug, Release, RelWithDebInfo, MinSizeRel)")
 
 project(pdf2htmlEX)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-cmake_minimum_required(VERSION 2.6.0 FATAL_ERROR)
+
+include_directories(/opt/homebrew/opt/gettext/include)
+link_directories(/opt/homebrew/opt/gettext/lib)
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GLIB2 REQUIRED glib-2.0)
+
+include_directories(${GLIB2_INCLUDE_DIRS})
+link_directories(${GLIB2_LIBRARY_DIRS})
+add_definitions(${GLIB2_CFLAGS_OTHER})
+
+include_directories(
+    /opt/homebrew/include/glib-2.0
+    /opt/homebrew/lib/glib-2.0/include
+)
+
+include_directories(/opt/homebrew/opt/cairo/include)
+link_directories(/opt/homebrew/opt/cairo/lib)
+
 
 option(ENABLE_SVG "Enable SVG support, for generating SVG background images and converting Type 3 fonts" ON)
 
@@ -206,7 +226,12 @@ set(PDF2HTMLEX_SRC ${PDF2HTMLEX_SRC}
     )
 
 add_executable(pdf2htmlEX ${PDF2HTMLEX_SRC})
-target_link_libraries(pdf2htmlEX ${PDF2HTMLEX_LIBS})
+target_link_libraries(pdf2htmlEX
+    ${PDF2HTMLEX_LIBS}
+    iconv
+    intl
+    "-framework Carbon"
+)
 
 add_custom_target(pdf2htmlEX_resources ALL DEPENDS
     ${CMAKE_SOURCE_DIR}/share/base.min.css

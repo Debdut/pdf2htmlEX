@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # This shell script builds pdf2htmlEX
-
-# source ./buildScripts/reSourceVersionEnvs
-. ./buildScripts/reSourceVersionEnvs
+sh ./buildScripts/versionEnvs
+sh ./buildScripts/reSourceVersionEnvs
+sh ./buildScripts/flags.sh
 
 echo ""
 echo "-------------------------------------------------------------------"

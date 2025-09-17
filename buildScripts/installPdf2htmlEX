@@ -1,32 +1,64 @@
 #!/bin/sh
+# -------------------------------------------------------------------
+# LOCAL INSTALLATION OF PDF2HTMLEX (NO SUDO REQUIRED)
+# -------------------------------------------------------------------
+
+# Set local installation prefix
+export PDF2HTMLEX_PREFIX=$HOME/.pdf2htmlEX
+export PATH="$PDF2HTMLEX_PREFIX/bin:$PATH"
 
 echo ""
 echo "-------------------------------------------------------------------"
 echo "INSTALLING pdf2htmlEX locally"
+echo "  Installation prefix: [$PDF2HTMLEX_PREFIX]"
 echo "  (UNATTENDED: [$UNATTENDED])"
 echo "-------------------------------------------------------------------"
 echo ""
 
-
+# Prompt user unless unattended
 if [ -z "$UNATTENDED" ] ; then
-
-  echo "This installation assumes you have 'sudo' privileges"
-  echo ""
-  echo "Type ctrl-c now if DO NOT want to continue"
-  read -p "Type anything else to continue: "
-
+    echo "This installation will be local (no sudo required)."
+    echo ""
+    echo "Press ctrl-c now to cancel, or enter to continue."
+    read -p "Type anything else to continue: "
 fi
 
+# Stop on errors and print commands
 set -ev
 
-cd pdf2htmlEX/build
+# -------------------------------
+# 1. Build & Install pdf2htmlEX
+# -------------------------------
+cd pdf2htmlEX
+mkdir -p build
+cd build
 
-sudo make install
+# Configure CMake to install locally
+cmake .. \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX=$PDF2HTMLEX_PREFIX
 
-## NEED to install poppler-data!!!
-#
+# Build and install
+make -j$(nproc)
+make install
+
+# -------------------------------
+# 2. Install poppler-data locally
+# -------------------------------
 cd ../../poppler-data
 
-sudo make install                             \
-  prefix=$PDF2HTMLEX_PREFIX                   \
+make install \
+  prefix=$PDF2HTMLEX_PREFIX \
   datadir=$PDF2HTMLEX_PREFIX/share/pdf2htmlEX
+
+# -------------------------------
+# 3. Done
+# -------------------------------
+echo ""
+echo "-------------------------------------------------------------------"
+echo "Installation completed!"
+echo "Make sure $PDF2HTMLEX_PREFIX/bin is in your PATH to run pdf2htmlEX"
+echo "You can add this line to ~/.bashrc or ~/.zshrc:"
+echo "  export PATH=\"$PDF2HTMLEX_PREFIX/bin:\$PATH\""
+echo "-------------------------------------------------------------------"
+echo ""

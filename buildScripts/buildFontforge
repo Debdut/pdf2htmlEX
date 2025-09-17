@@ -1,9 +1,8 @@
 #!/bin/sh
 
-# This shell script build FontForge
-
-# source buildScripts/reSourceVersionEnvs
-. buildScripts/reSourceVersionEnvs
+sh ./buildScripts/versionEnvs
+sh ./buildScripts/reSourceVersionEnvs
+sh ./buildScripts/flags.sh
 
 echo ""
 echo "-------------------------------------------------------------------"
@@ -48,6 +47,7 @@ cmake        		                        \
   -DSPHINX_USE_VENV:BOOL=OFF                \
   -DREAL_TYPE:ENUM="double"                 \
   -DTHEME:ENUM="tango"                      \
+  -DBUILD_SHARED_LIBS=OFF                   \
   ..
 
 # Apply any patches required for fontforge raw sources before we make
