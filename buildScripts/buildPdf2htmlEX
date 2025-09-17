@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # This shell script builds pdf2htmlEX
-sh ./buildScripts/versionEnvs
 sh ./buildScripts/reSourceVersionEnvs
 sh ./buildScripts/flags.sh
 

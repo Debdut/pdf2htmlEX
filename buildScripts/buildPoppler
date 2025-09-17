@@ -2,10 +2,8 @@
 
 # This shell script builds the latest poppler
 
-sh ./buildScripts/versionEnvs
 sh ./buildScripts/reSourceVersionEnvs
 sh ./buildScripts/flags.sh
-
 
 echo ""
 echo "-------------------------------------------------------------------"
@@ -16,6 +14,7 @@ echo ""
 set -ev
 
 cd poppler
+rm -rf build
 mkdir build
 cd build
 cmake                                       \
