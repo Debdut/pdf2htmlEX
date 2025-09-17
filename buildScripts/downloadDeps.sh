@@ -8,10 +8,10 @@ cp patches/fontforge/fontforgeexe/CMakeLists.txt fontforge/fontforgeexe/CMakeLis
 cp patches/fontforge/po/CMakeLists.txt fontforge/po/CMakeLists.txt
 cp patches/fontforge/pyhook/CMakeLists.txt fontforge/pyhook/CMakeLists.txt
 
-curl -L https://poppler.freedesktop.org/poppler-25.09.1.tar.xz -o poppler.tar.xz
+curl -L https://poppler.freedesktop.org/poppler-24.06.1.tar.xz -o poppler.tar.xz
 tar -xf poppler.tar.xz
 rm poppler.tar.xz
-mv poppler-25.09.1 poppler
+mv poppler-24.06.1 poppler
 
 curl -L https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz -o poppler-data.tar.gz
 tar -xf poppler-data.tar.gz

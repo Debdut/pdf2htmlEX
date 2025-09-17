@@ -4,24 +4,15 @@
 # -------------------------------------------------------------------
 
 # Set local installation prefix
-export PDF2HTMLEX_PREFIX=$HOME/.pdf2htmlEX
+export PDF2HTMLEX_PREFIX=$HOME/.pdf2html
 export PATH="$PDF2HTMLEX_PREFIX/bin:$PATH"
 
 echo ""
 echo "-------------------------------------------------------------------"
 echo "INSTALLING pdf2htmlEX locally"
 echo "  Installation prefix: [$PDF2HTMLEX_PREFIX]"
-echo "  (UNATTENDED: [$UNATTENDED])"
 echo "-------------------------------------------------------------------"
 echo ""
-
-# Prompt user unless unattended
-if [ -z "$UNATTENDED" ] ; then
-    echo "This installation will be local (no sudo required)."
-    echo ""
-    echo "Press ctrl-c now to cancel, or enter to continue."
-    read -p "Type anything else to continue: "
-fi
 
 # Stop on errors and print commands
 set -ev
@@ -49,7 +40,7 @@ cd ../../poppler-data
 
 make install \
   prefix=$PDF2HTMLEX_PREFIX \
-  datadir=$PDF2HTMLEX_PREFIX/share/pdf2htmlEX
+  datadir=$PDF2HTMLEX_PREFIX/share
 
 # -------------------------------
 # 3. Done
